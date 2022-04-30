@@ -1,0 +1,20 @@
+{% extends "base/base_back.html" %}
+
+{% load i18n crispy_forms_tags %}
+{% load l10n %}
+
+{% block breadcrumbs %}
+    <a href="{% url 'dashboard' %}">Inicio</a>
+    &rsaquo;
+    <a href="{% url 'backend:group_list' %}"></a>
+    &rsaquo;
+{% endblock %}
+
+{% block content_title %}
+    {{ opts.verbose_name|capfirst }}|
+    <small>{{ title }}</small>
+{% endblock content_title %}
+
+{% block content %}
+    {% crispy form %}
+{% endblock content %}

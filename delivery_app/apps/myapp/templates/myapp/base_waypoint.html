@@ -1,0 +1,66 @@
+{% load static %}
+{% load user_menu %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- visit https://fonts.google.com/specimen/Courier+Prime?preview.text_type=custom to get script-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main.css' %}"></link>
+    <link href="{% static 'bower/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/bootstrap/dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'typehead/typehead.css' %}" rel="stylesheet">
+
+    <!-- http://fortawesome.github.io/Font-Awesome/icons/-->
+    <link href="{% static 'bower/components-font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/jasny-bootstrap/dist/css/jasny-bootstrap.css' %}" rel="stylesheet">
+
+    <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
+    <link href="{% static 'custom/css/navbar-fixed-top.css' %}" rel="stylesheet">
+    <!-- This allows us to extend the head scripts in HTML docs that have special requirements-->
+    {% block extend_head %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+{% load_menu request %}
+
+{% include "base/partials/header.html" %}
+<!-- This allows us to extend the nav bar in HTML docs that have special requirements-->
+{% block extend_nav %}
+
+{% endblock %}
+
+<div class="div-container">
+
+    {#    {% include 'main/partials/logo.html' %}#}
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+<!--visit https://code.jquery.com/ for jquery script-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- This allows us to extend the foot scripts in HTML docs that have special requirements-->
+{% block extend_footer %}
+
+{% endblock %}
+
+<script src="{% static 'main.js' %}"></script>
+
+
+</body>
+</html>

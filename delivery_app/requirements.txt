@@ -1,0 +1,8 @@
+Django==1.11.29
+django-crispy-forms==1.7.0
+docutils==0.17.1
+Pillow
+django-google-maps
+requests
+bootstrap-admin
+simplejson

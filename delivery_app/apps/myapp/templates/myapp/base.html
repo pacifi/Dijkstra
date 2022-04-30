@@ -1,0 +1,107 @@
+{% load i18n static user_menu %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block extrahead %}
+    {% endblock extrahead %}
+    <title>{% block title %}base{% endblock title %}</title>
+
+    <link href="{% static 'bower/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/bootstrap/dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'typehead/typehead.css' %}" rel="stylesheet">
+
+    <!-- http://fortawesome.github.io/Font-Awesome/icons/-->
+    <link href="{% static 'bower/components-font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/jasny-bootstrap/dist/css/jasny-bootstrap.css' %}" rel="stylesheet">
+
+    <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'bower/bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
+    <link href="{% static 'custom/css/navbar-fixed-top.css' %}" rel="stylesheet">
+    {% block extrastyle %}
+    {% endblock extrastyle %}
+
+    {% block customcss %}
+
+    {% endblock %}
+
+
+    {% load_menu request %}
+
+    {% include "base/partials/header.html" %}
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
+    {% block headjs %}
+    {% endblock headjs %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body>
+
+{% block header %}
+{% endblock header %}
+
+
+{% block footer %}
+{% endblock footer %}
+
+<!-- This allows us to extend the nav bar in HTML docs that have special requirements-->
+
+
+<div class="div-container">
+
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+
+<!--visit https://code.jquery.com/ for jquery script-->
+
+{#  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>#}
+
+<!-- This allows us to extend the foot scripts in HTML docs that have special requirements-->
+<script type="text/javascript" src="{% url 'javascript_catalog' %}"></script>
+
+<script src="{% static 'bower/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+<!-- http://www.jsdelivr.com/#!momentjs http://momentjs.com/timezone/-->
+<script src="{% static 'bower/moment/min/moment-with-locales.min.js' %}"></script>
+<script src="{% static 'bower/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'typehead/bootstrap.typehead.min.js' %}"></script>
+
+{% block extrajs %}
+    <script src="{% static 'bower/jasny-bootstrap/dist/js/jasny-bootstrap.js' %}"></script>
+
+    <script src="{% static 'custom/js/jquery.kumbiaphp.js' %}"></script>
+    <script src="{% static 'custom/js/jquery.kgrid.js' %}"></script>
+
+    <script src="{% static 'custom/js/backend.js' %}"></script>
+    <script src="{% static 'custom/js/validador.js' %}"></script>
+    <script src="{% static 'custom/js/jquery.keyfilter.js' %}"></script>
+    <script src="{% static 'bower/jasny-bootstrap/js/fileinput.js' %}"></script>
+{% endblock extrajs %}
+
+{% block customjs %}
+
+{% endblock %}
+
+
+</body>
+</html>

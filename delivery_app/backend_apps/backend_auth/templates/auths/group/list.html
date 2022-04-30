@@ -1,0 +1,94 @@
+{% extends "base/base_back.html" %}
+
+{% load i18n app_security %}
+{% load l10n humanize %}
+
+{% block breadcrumbs %}
+    <a href="{% url 'dashboard' %}">{% trans 'Home' %}</a>
+    &rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+    {{ opts.verbose_name_plural|capfirst }}|
+    <small>{{ title }}</small>
+{% endblock content_title %}
+
+{% block content %}
+    <script type="text/javascript">
+        $(function () {
+            $('table').kgrid({
+                form_data: ['{{f}}', '{{q}}'],
+                form_to: '{% url "backend:group_list" %}?f={{f}}&q={{q}}',
+                order_attr: 'class=""',
+                order_to: '{% url "backend:group_list" %}?f={{f}}&q={{q}}',
+            });
+        });
+    </script>
+
+    <div class="btn-toolbar btn-toolbar-top">
+        <div class="row">
+            <div class="btn-actions">
+                <a href="{% url 'backend:group_add' %}" class="btn btn-primary text-bold"
+                   title="{% trans 'Add' %} {% trans 'Menu' %}"><i class="fa fa-plus"></i> <span
+                        class="hidden-xs"> {% trans 'Add' %}</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-overflow">
+        <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th class="col-hidden" data-search="name" data-order="name">Nombre</th>
+                <th class="btn-actions col-blocked text-center">{% trans 'Action' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for d in object_list %}
+                <tr>
+                    <td>{% if is_paginated %}
+                        {{ page_obj.start_index|add:forloop.counter0 }}
+                    {% else %}
+                        {{ forloop.counter }}
+                    {% endif %}
+                    </td>
+                    <td>{{ d.name }}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a href="{% url 'backend:group_update' d.pk %}"
+                               class="btn btn-info btn-sm text-bold"
+                               title="{% trans 'Change' %} {% trans 'Grupo' %}" rel="tooltip"><i
+                                    class="btn-icon-only fa fa-edit"></i></a>
+
+
+                            <a href="{% url 'backend:group_delete' d.pk %}"
+                               class="btn btn-danger btn-sm js-confirm text-bold"
+                               msg-title="{% trans 'Delete' %} {% trans 'Menu' %}?."
+                               msg="{% trans 'Are you sure?' %}<br/>{% trans 'Remember that this operation can not be reversed.' %}"
+                               title="{% trans 'Delete' %} {% trans 'Grupo' %}" rel="tooltip"><i
+                                    class="btn-icon-only fa fa-trash-o"></i></a>
+                        </div>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="row">
+        {% if is_paginated %}
+            {% load paginator %}
+            {% paginator %}
+        {% else %}
+            <div class="col-md-12">
+                <ul class="breadcrumbpag">
+                    {{ object_list.count }}
+                    {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}
+                        {{ opts.verbose_name_plural|capfirst }}{% endifequal %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock content %}

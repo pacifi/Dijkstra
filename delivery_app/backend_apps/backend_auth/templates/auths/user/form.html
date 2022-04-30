@@ -1,0 +1,59 @@
+{% extends "base/base_back.html" %}
+
+{% load i18n crispy_forms_tags staticfiles %}
+{% load l10n %}
+
+{% block breadcrumbs %}
+    <a href="{% url 'dashboard' %}">{% trans 'Home' %}</a>
+    &rsaquo;
+    <a href="{% url 'backend:user_list' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+    &rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+    {{ opts.verbose_name|capfirst }}|
+    <small>{{ title }}</small>
+{% endblock content_title %}
+
+{% block content %}
+
+    {% crispy form %}
+
+{% endblock %}
+
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'custom/css/admin.css' %}">
+{% endblock extrastyle %}
+
+
+{% block customjs %}
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+
+    <script src="{% static 'admin/js/SelectBox.js' %}"></script>
+    <script src="{% static 'admin/js/SelectFilter2.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#id_photo').fileinput({
+                showUpload: false,
+                showRemove: false,
+                initialCaption: '{{ form.photo.value }}',
+                initialPreview: ['<img src="{{ MEDIA_URL }}{{ form.photo.value }}">',],
+                browseClass: 'btn btn-warning',
+                browseLabel: '<span class="hidden-xs">{% trans "Pick image" %}</span>',
+                browseIcon: '<i class="btn-icon-only glyphicon glyphicon-picture"></i>',
+            });
+
+            jQuery.each($('#id_groups'), function () {
+                // "Locations" can be any label you want
+                SelectFilter.init('id_groups', "{% trans 'groups'|capfirst %}", false, '/static/admin/');
+            });
+
+
+        });
+    </script>
+{% endblock customjs %}

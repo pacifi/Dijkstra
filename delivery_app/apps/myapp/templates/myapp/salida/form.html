@@ -1,0 +1,60 @@
+{% extends "base/base_back.html" %}
+{% load static %}
+{% block content %}
+    <div ng-app="myApp">
+        <div class="" ng-controller="salidaCtrl as ctrl">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <caption>Lista De Salidas</caption>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Posición</th>
+                            <th>Acción</th>
+                        </tr>
+                        <tr ng-repeat="pedido in ctrl.pedidos">
+                            <td>{[{ pedido.fields.cliente }]}</td>
+                            <td>{[{ pedido.fields.geolocation }]}</td>
+                            <td>
+                                <button class="btn btn-primary" ng-click="ctrl.selectPedido(pedido)">
+                                    <i class="fa fa-send"></i></button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <caption>Lista de Agregados al Carros</caption>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>POsición</th>
+                            <th>Accion</th>
+                        </tr>
+                        <tr ng-repeat="pedido_s in ctrl.pedidos_selected">
+                            <td>{[{pedido_s.fields.cliente}]}</td>
+                            <td>{[{ pedido_s.fields.geolocation }]}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="form-inline">
+                <caption>Unidad de Reparto</caption>
+
+                <select class="form-control" ng-model="ctrl.user_selected">
+                    <option value="{[{ user.fields.username }]}" ng-repeat="user in ctrl.users">
+                        {[{ user.fields.username }]}
+                    </option>
+                </select>
+
+            </div>
+            <button class="btn btn-primary" ng-click="ctrl.salidaCrear()"><i class="fa fa-calculator"></i>
+                Calcular Ruta
+            </button>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block customjs %}
+    <script src="{% static "myapp/salida/salidactrl.js" %}"></script>
+    <script src="{% static "myapp/service.js" %}"></script>
+{% endblock customjs %}
